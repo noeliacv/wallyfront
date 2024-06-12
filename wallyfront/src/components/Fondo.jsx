@@ -11,7 +11,8 @@ const Fondo = () => {
             <p>"WallyNet" es como el director de orquesta que armoniza cada nota de la experiencia deportiva, desde la inscripcion hasta el ultimo punto en la cancha, 
             creando una sinfonia digital que eleva el juego y la comunidad a nuevas alturas.
             </p>
-            <button className='btn'><NavLink to = '/RegistroCliente'>Comienza Ahora</NavLink><img src={flecha} alt="" /></button>
+            <button className='btn'><NavLink to = '/RegistroCliente'>Registrate ahora</NavLink><img src={flecha} alt="" /></button>
+            <button className='btn'><NavLink to = '/RegistroCliente'>Inicia Sesion</NavLink><img src={flecha} alt="" /></button>
         </div>
     </div>
   )
