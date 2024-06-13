@@ -1,6 +1,6 @@
 import './App.css'
 import {Route, Routes}from "react-router-dom";
-import {Home} from "./components/pages";
+import {Home, Registro} from "./components/pages";
 import Fotter from "./components/Fotter"
 function App() {
 
@@ -11,6 +11,7 @@ function App() {
         <div className="content">
           <Routes>
             <Route path='/' element= {<Home/>}/>
+            <Route path='/Registro' element= {<Registro/>}/>
           </Routes>
           <Fotter/>
         </div>

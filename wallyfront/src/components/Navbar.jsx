@@ -39,7 +39,6 @@ export const Navbar = () => {
     }
   }, [location.pathname]);
 
-
   return (
     <nav className={`bar ${fijar ? 'dark-bar' : ''}`}>
       <Link to="/" className="title">
@@ -53,7 +52,7 @@ export const Navbar = () => {
           <button className="btn" onClick={openModal}>Inicia Sesion</button>
         </li>
         <li>
-          <button className="btn">Registrate</button>
+          <button className="btn" ><NavLink to= "/Registro">Registro</NavLink></button>
         </li>
       </ul>
       <Modal
