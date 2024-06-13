@@ -329,4 +329,12 @@ function Registro() {
     );
 }
 
+{/*
+“Reserva, Juega, Gana - ¡Tu cancha de vóley espera!”
+“Vóley a tu manera - Canchas y torneos a un clic.”
+“Eleva tu juego - Torneos y canchas al alcance de tu mano.”
+“Desde la red hasta la victoria - Tu lugar para el vóley.”
+“Canchas listas, jugadores preparados - ¡Que comience el juego!” 
+*/}
+
 export default Registro;
