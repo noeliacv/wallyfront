@@ -36,3 +36,28 @@ nav ul li:nth-child(-n+3):hover {
   border-bottom: 2px solid #fff;
   color: #fff;
 }
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  max-width: 450px; /* Ajusta el ancho máximo según lo necesites */
+  max-height: 500px; /* Ajusta la altura máxima según lo necesites */
+  overflow: auto; /* Permite desplazar el contenido si es demasiado grande */
+  background-color: white; /* Ajusta el color de fondo según lo necesites */
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Cambia la opacidad del fondo */
+  z-index: 1000; /* Asegura que el overlay esté por encima de otros elementos */
+}
+

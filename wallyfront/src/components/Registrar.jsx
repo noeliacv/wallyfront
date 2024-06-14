@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { NavLink } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc, setDoc, doc } from 'firebase/firestore';
+import { setDoc, doc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { toast } from 'react-toastify';
 import upload from "../images/subir.png";
 import avatarDefault from '../images/avatar2.jpg';
+import { PlusOutlined } from "@ant-design/icons";   
 import "./Registrar.css";
 import {
     Form,
@@ -16,7 +17,8 @@ import {
     Row,
     Input,
     InputNumber,
-    Modal
+    Modal,
+    Result
 } from "antd";
 import { db, auth } from "../firebase/firebase-conf";
 
@@ -29,6 +31,7 @@ function Registro() {
     const [registroExitoso, setRegistroExitoso] = useState(false);
     const [form] = Form.useForm();
     const [visible, setVisible] = useState(false);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
     const handleChange = (e) => {
         const file = e.target.files[0];
@@ -89,6 +92,20 @@ function Registro() {
     const cerrarModal = () => {
         setVisible(false);
     };
+
+    useEffect(() => {
+        const checkForm = async () => {
+            try {
+                await form.validateFields();
+                setIsButtonDisabled(image === URL_DEFAULT);
+            } catch {
+                setIsButtonDisabled(true);
+            }
+        };
+
+        checkForm();
+    }, [form, image]);
+
     return (
         <div className="Registro">
             <header className="Registro-header">
@@ -98,6 +115,7 @@ function Registro() {
                     wrapperCol={{ span: 14 }}
                     form={form}
                     onFinish={handleRegister}
+                    onFieldsChange={() => setIsButtonDisabled(false)} // Vuelve a habilitar el botón si se han realizado cambios en los campos
                 >
                     <Row gutter={[16, 16]}>
                         <Col span={12}>
@@ -128,9 +146,9 @@ function Registro() {
                                         message: "Por favor Ingrese su Apellido",
                                     },
                                     { whitespace: true },
-                                    { min: 2, message: "El nombre debe tener al menos 2 caracteres" },
-                                    { max: 30, message: "El nombre no puede tener más de 30 caracteres" },
-                                    { pattern: /^[a-zA-Z\s]*$/, message: "El nombre solo puede contener letras del alfabeto" },
+                                    { min: 2, message: "El apellido debe tener al menos 2 caracteres" },
+                                    { max: 30, message: "El apellido no puede tener más de 30 caracteres" },
+                                    { pattern: /^[a-zA-Z\s]*$/, message: "El apellido solo puede contener letras del alfabeto" },
                                 ]}
                                 hasFeedback
                             >
@@ -206,7 +224,7 @@ function Registro() {
                                     <Option value="santa cruz">Santa Cruz</Option>
                                     <Option value="cochabamba">Cochabamba</Option>
                                     <Option value="oruro">Oruro</Option>
-                                    <Option value="sucre">Sucre</Option>
+                                       <Option value="sucre">Sucre</Option>
                                     <Option value="tarija">Tarija</Option>
                                     <Option value="potosi">Potosí</Option>
                                     <Option value="beni">Beni</Option>
@@ -318,8 +336,21 @@ function Registro() {
                             </Modal>
                         </Checkbox>
                     </Form.Item>
+                    {registroExitoso && (
+                        <div className="mensaje-flotante">
+                            <Result
+                                status="success"
+                                title="Felicidades! Tu registro fue exitoso!"
+                                subTitle="Ahora podras comensar a disfrutar de lo mejor de nuestra comunidad."
+                                extra={[
+                                    <Button type="primary" key="console"><NavLink to='/ConoceMas'>Comenzar</NavLink></Button>
+
+                                ]}
+                            />
+                        </div>
+                    )}
                     <Form.Item wrapperCol={{ offset: 8, span: 8 }}>
-                        <Button type="primary" htmlType="submit" disabled={image === URL_DEFAULT}>
+                        <Button type="primary" htmlType="submit" disabled={isButtonDisabled}>
                             Registrarse
                         </Button>
                     </Form.Item>
@@ -329,6 +360,9 @@ function Registro() {
     );
 }
 
+export default Registro;
+
+
 {/*
 “Reserva, Juega, Gana - ¡Tu cancha de vóley espera!”
 “Vóley a tu manera - Canchas y torneos a un clic.”
@@ -337,4 +371,3 @@ function Registro() {
 “Canchas listas, jugadores preparados - ¡Que comience el juego!” 
 */}
 
-export default Registro;

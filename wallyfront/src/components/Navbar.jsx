@@ -52,18 +52,31 @@ export const Navbar = () => {
           <button className="btn" onClick={openModal}>Inicia Sesion</button>
         </li>
         <li>
-          <button className="btn" ><NavLink to= "/Registro">Registro</NavLink></button>
+          <button className="btn"><NavLink to="/Registro">Registro</NavLink></button>
         </li>
       </ul>
       <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        shouldCloseOnOverlayClick={true}
-        className="modal"
-        overlayClassName="overlay"
-      >
-        <Login onClose={closeModal} />
-      </Modal>
+  isOpen={modalIsOpen}
+  onRequestClose={closeModal}
+  shouldCloseOnOverlayClick={true}
+  className="modal"
+  overlayClassName="overlay"
+  contentLabel="Inicio de Sesión"
+  style={{
+    content: {
+      width: "70%", // Ajusta el ancho del modal según sea necesario
+      height: "80%", // Ajusta la altura del modal según sea necesario
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      borderRadius: "15px",
+      padding: "5px"
+    }
+  }}
+>
+  <Login onClose={closeModal} />
+</Modal>
+
     </nav>
   );
 };

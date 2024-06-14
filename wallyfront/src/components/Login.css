@@ -1,13 +1,17 @@
 .wrapper {
-    position: relative;
-    width: 410px;
-    height: 420px;
-    background: #ffffff;
-    border-radius: 15px;
-    color: #333;
+    position: fixed;
     top: 50%;
     left: 50%;
-}
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 15px;
+    padding: 10px;
+    width: 410px;
+    height: 420px;
+    overflow: hidden;
+  }
+  
+
 
 .wrapper .close-button {
     position: absolute;
@@ -85,18 +89,17 @@ form .remember-forgot {
 
 .btn-log {
     width: 100%;
-    height: 45px;
-    background: #212EA0 !important;
-    border: none !important;
-    text-align: center !important;
-    outline: none;
-    margin-left: 0px !important;
-    border-radius: 40px !important;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    cursor: pointer !important;
-    font-size: 16px;
-    color: #FFFF !important;
-    font-weight: 700;
+  height: 45px;
+  background: #212EA0 !important;
+  border: none !important;
+  text-align: center !important;
+  outline: none;
+  border-radius: 40px !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer !important;
+  font-size: 16px;
+  color: #FFFF !important;
+  font-weight: 700;
 }
 
 form .register-link {

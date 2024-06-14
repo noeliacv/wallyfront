@@ -1,2 +1,5 @@
 export * from "./Home"
 export * from "./Registro"
+export * from "./Busqueda"
+export * from "./RegistrarWally"
+export * from "./RegistrarTorneo"
