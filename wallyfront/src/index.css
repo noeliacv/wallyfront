@@ -39,3 +39,12 @@ a{
   padding-left: 10%;
   padding-right: 10%;
 }
+
+.fondos{
+
+  background: linear-gradient(rgba(49, 33, 147, 0.7), rgba(211, 210, 223, 0.7)), url(../src/images/fondo-wally.png);
+}
+
+.spa{
+  margin-top: 70px;
+}

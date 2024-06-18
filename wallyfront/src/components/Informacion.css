@@ -1,0 +1,17 @@
+.principal{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.medio{
+    flex: 1;
+    border: 0.8px solid black;
+    margin: 15px;
+    border-radius: 15px;
+    box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.principal :hover{
+    background: #98ceca;
+}

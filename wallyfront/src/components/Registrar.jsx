@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { NavLink } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -27,7 +28,7 @@ const { Option } = Select;
 function Registro() {
     const URL_DEFAULT = avatarDefault;
     const [image, setImage] = useState(URL_DEFAULT);
-    const [imageFile, setImageFile] = useState(null); // Estado para almacenar el archivo de imagen
+    const [imageFile, setImageFile] = useState(null); 
     const [registroExitoso, setRegistroExitoso] = useState(false);
     const [form] = Form.useForm();
     const [visible, setVisible] = useState(false);
@@ -36,7 +37,7 @@ function Registro() {
     const handleChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setImageFile(file); // Guardar el archivo de imagen en el estado
+            setImageFile(file);
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImage(reader.result);
@@ -59,17 +60,17 @@ function Registro() {
         };
 
         try {
-            // Crear usuario en Firebase Auth
+            
             const userCredential = await createUserWithEmailAndPassword(auth, formData.correo, formData.contraseña);
             const user = userCredential.user;
 
-            // Subir imagen a Firebase Storage y obtener URL de descarga
+           
             const storage = getStorage();
             const storageRef = ref(storage, `profile_pictures/${user.uid}`);
             await uploadBytes(storageRef, imageFile);
             const imageURL = await getDownloadURL(storageRef);
 
-            // Guardar datos del usuario en Firestore, incluyendo la URL de la imagen
+          
             formData.imageURL = imageURL;
             await setDoc(doc(db, "clientes", user.uid), formData);
 
@@ -115,7 +116,7 @@ function Registro() {
                     wrapperCol={{ span: 14 }}
                     form={form}
                     onFinish={handleRegister}
-                    onFieldsChange={() => setIsButtonDisabled(false)} // Vuelve a habilitar el botón si se han realizado cambios en los campos
+                    onFieldsChange={() => setIsButtonDisabled(false)}
                 >
                     <Row gutter={[16, 16]}>
                         <Col span={12}>
@@ -332,7 +333,7 @@ function Registro() {
                                 footer={null}
                             >
                                 <h1>Términos y Condiciones</h1>
-                                {/* Tu contenido de términos y condiciones */}
+                                
                             </Modal>
                         </Checkbox>
                     </Form.Item>
@@ -343,7 +344,7 @@ function Registro() {
                                 title="Felicidades! Tu registro fue exitoso!"
                                 subTitle="Ahora podras comensar a disfrutar de lo mejor de nuestra comunidad."
                                 extra={[
-                                    <Button type="primary" key="console"><NavLink to='/ConoceMas'>Comenzar</NavLink></Button>
+                                    <Button type="primary" key="console"><NavLink to='/'>Comenzar</NavLink></Button>
 
                                 ]}
                             />
@@ -370,4 +371,3 @@ export default Registro;
 “Desde la red hasta la victoria - Tu lugar para el vóley.”
 “Canchas listas, jugadores preparados - ¡Que comience el juego!” 
 */}
-

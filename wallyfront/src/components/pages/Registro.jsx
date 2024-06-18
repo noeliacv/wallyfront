@@ -5,8 +5,9 @@ import Navbar from "../Navbar";
 export const Registro = () => {
   return (
     <>
-    <Navbar/>
+    <div className="spa">
     <Title subTitulo="Tu lugar para el Wally" titulo="Registrate Ahora" />
+    </div>
     <Registrar />
     </>
   );

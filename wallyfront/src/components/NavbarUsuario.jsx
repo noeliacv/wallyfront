@@ -48,9 +48,9 @@ export const NavbarUsuario = ({ userData, userID }) => {
         setMenuOpen(!menuOpen);
     };
     
-    {/*if (!userData) {
+    if (!userData) {
         return <div>Loading...</div>;
-    }*/}
+    }
 
     const userAvatar = userData?.imageURL ? userData.imageURL : user_1;
 

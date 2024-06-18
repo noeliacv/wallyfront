@@ -1,12 +1,13 @@
 import React from "react";
 import Title from "../Title";
-import NavbarUsuario from "../NavbarUsuario";
-export const RegistrarTorneo = () => {
+import Torneo from "../Torneo";
+export const RegistrarTorneo = ({user_ID}) => {
   return (
     <>
-    <NavbarUsuario/>
+    <div className="fondos spa">
     <Title subTitulo="Tu lugar para el Wally" titulo="Registrate Ahora" />
-
+    <Torneo user_ID={user_ID}/>
+    </div>
     </>
   );
 };

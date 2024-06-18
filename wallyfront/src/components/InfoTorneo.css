@@ -1,0 +1,39 @@
+.torneo-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.torneo-card {
+    width: calc(33.333% - 32px);
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.torneo-card:hover {
+    transform: translateY(-5px);
+}
+
+.torneo-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.torneo-info {
+    padding: 16px;
+}
+
+.torneo-info h2 {
+    margin: 0 0 8px;
+    font-size: 1.5em;
+}
+
+.torneo-info p {
+    margin: 4px 0;
+    font-size: 1em;
+}

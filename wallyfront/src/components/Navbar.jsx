@@ -51,9 +51,6 @@ export const Navbar = () => {
         <li>
           <button className="btn" onClick={openModal}>Inicia Sesion</button>
         </li>
-        <li>
-          <button className="btn"><NavLink to="/Registro">Registro</NavLink></button>
-        </li>
       </ul>
       <Modal
   isOpen={modalIsOpen}
@@ -64,8 +61,8 @@ export const Navbar = () => {
   contentLabel="Inicio de Sesión"
   style={{
     content: {
-      width: "70%", // Ajusta el ancho del modal según sea necesario
-      height: "80%", // Ajusta la altura del modal según sea necesario
+      width: "70%", 
+      height: "80%", 
       top: "50%",
       left: "50%",
       transform: "translate(-50%, -50%)",

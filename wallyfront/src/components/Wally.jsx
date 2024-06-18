@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc, collection, addDoc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { toast } from 'react-toastify';
 import upload from "../images/subir.png";
 import avatarDefault from '../images/avatar2.jpg';
-import { PlusOutlined, MinusCircleOutlined } from "@ant-design/icons";
-import "./Torneo.css";
-
+import { PlusOutlined } from "@ant-design/icons";
+import "./Wally.css";
+import moment from 'moment';
 import {
     Form,
     Button,
@@ -19,28 +20,26 @@ import {
     InputNumber,
     Modal,
     Result,
-    TimePicker,
-    DatePicker,
-    Space
+    TimePicker
 } from "antd";
-const { RangePicker } = DatePicker;
 import { db, auth } from "../firebase/firebase-conf";
 
 const { Option } = Select;
 
-function Torneo({user_ID}) {
+function Wally({ user_ID }) {  
     const URL_DEFAULT = avatarDefault;
     const [image, setImage] = useState(URL_DEFAULT);
-    const [imageFile, setImageFile] = useState(null);
+    const [imageFile, setImageFile] = useState(null); 
     const [registroExitoso, setRegistroExitoso] = useState(false);
     const [form] = Form.useForm();
     const [visible, setVisible] = useState(false);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-
+    const user = user_ID;
+    console.log("El Id es ", user)
     const handleChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setImageFile(file);
+            setImageFile(file); 
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImage(reader.result);
@@ -48,35 +47,53 @@ function Torneo({user_ID}) {
             reader.readAsDataURL(file);
         }
     };
-    console.log("Id de usuario", user_ID)
+
     const handleRegister = async (values) => {
+
         const horario = values.horario ? values.horario.map(time => time.format('HH:mm')) : null;
-        const fechas = values.fechas ? values.fechas.map(date => date.toDate()) : null;
+
         const formData = {
-            nombre: values.nombreTorneo,
-            nombreWally: values.nombreWally,
-            ubicacion: values.ubicacion,
+            nombre: values.nombre,
+            direccion: values.direccion,
             horario: horario,
-            fecha: fechas,
             departamento: values.departamento,
-            jugadores: values.jugadores,
+            precio: values.precio,
             telefono: values.telefono,
-            userID: user_ID,
-            premios: values.premios || [] 
+            userID: user,
         };
 
+        if (!user) {
+            console.error("user_ID no está definido");
+            toast.error("Error: user_ID no está definido", {
+                position: "bottom-center"
+            });
+            return;
+        }
+
+        for (const key in formData) {
+            if (formData[key] === undefined) {
+                console.error(`El campo ${key} está indefinido`);
+                toast.error(`Error: El campo ${key} está indefinido`, {
+                    position: "bottom-center"
+                });
+                return;
+            }
+        }
+
         try {
+
             const userID = String(user_ID);
     
-            const docRef = await addDoc(collection(db, "torneo"), formData);
+            
+            const docRef = await addDoc(collection(db, "wallys"), formData);
             const generatedID = docRef.id;
-
+    
             const storage = getStorage();
-            const storageRef = ref(storage, `torneo_pictures/${generatedID}`);
+            const storageRef = ref(storage, `wally_pictures/${generatedID}`);
             await uploadBytes(storageRef, imageFile);
             const imageURL = await getDownloadURL(storageRef);
     
-            await setDoc(doc(db, "torneo", generatedID), { ...formData, imageURL });
+            await setDoc(doc(db, "wallys", generatedID), { ...formData, imageURL });
     
             setRegistroExitoso(true);
             toast.success("El Usuario Fue Registrado Exitosamente!", {
@@ -121,35 +138,16 @@ function Torneo({user_ID}) {
                     form={form}
                     onFinish={handleRegister}
                     onFieldsChange={() => setIsButtonDisabled(false)}
-
                 >
                     <Row gutter={[16, 16]}>
                         <Col span={12}>
                             <Form.Item
-                                name="nombreTorneo"
-                                label="Nombre Torneo"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: "Por favor Ingrese su Nombre del Torneo",
-                                    },
-                                    { whitespace: true },
-                                    { min: 2, message: "El nombre debe tener al menos 2 caracteres" },
-                                    { max: 30, message: "El nombre no puede tener más de 30 caracteres" },
-                                    { pattern: /^[a-zA-Z\s]*$/, message: "El nombre solo puede contener letras del alfabeto" },
-                                ]}
-                                hasFeedback
-                            >
-                                <Input placeholder="Ingrese el nombre del Torneo" />
-                            </Form.Item>
-
-                            <Form.Item
-                                name="nombreWally"
+                                name="nombre"
                                 label="Nombre Wally"
                                 rules={[
                                     {
                                         required: true,
-                                        message: "Por favor Ingrese su Nombre del Torneo",
+                                        message: "Por favor Ingrese su Nombre",
                                     },
                                     { whitespace: true },
                                     { min: 2, message: "El nombre debe tener al menos 2 caracteres" },
@@ -158,11 +156,11 @@ function Torneo({user_ID}) {
                                 ]}
                                 hasFeedback
                             >
-                                <Input placeholder="Ingrese el nombre del Wally donde sera el torneo" />
+                                <Input placeholder="Ingrese el nombre del Wally" />
                             </Form.Item>
 
                             <Form.Item
-                                name="ubicacion"
+                                name="direccion"
                                 label="Ubicacion"
                                 rules={[
                                     {
@@ -194,20 +192,6 @@ function Torneo({user_ID}) {
                                 />
                             </Form.Item>
 
-                            <Form.Item
-                                name="fechas"
-                                label="Seleccione Fechas"
-                                rules={[{
-                                    required: true,
-                                    message: "Por favor Seleccione hora de apertura y cierre"
-                                }]}
-                                hasFeedback
-                            >
-                                <RangePicker 
-                                    placeholder={['Inicio', 'Fin']}
-                                />
-                            </Form.Item>
-
                             <Form.Item name="departamento"
                                 label="Departamento"
                                 rules={[{
@@ -229,12 +213,12 @@ function Torneo({user_ID}) {
                             </Form.Item>
 
                             <Form.Item
-                                name="jugadores"
-                                label="Numero Max. Jugadores"
+                                name="precio"
+                                label="Precio por Hora"
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Por favor Ingrese el Numero Maximo de Jugadores',
+                                        message: 'Por favor Ingrese el Precio por Hora',
                                     },
                                     {
                                         validator: (_, value) => {
@@ -248,7 +232,7 @@ function Torneo({user_ID}) {
                                                 return Promise.reject(new Error('Ingrese un monto valido'));
                                             }
                                             const phoneNumber = value.toString();
-                                            if (phoneNumber.length < 1 || phoneNumber.length > 2) {
+                                            if (phoneNumber.length < 2 || phoneNumber.length > 2) {
                                                 return Promise.reject(new Error('El precio debe estar entre el rango Bs. 10 a Bs. 99'));
                                             }
                                             return Promise.resolve();
@@ -289,8 +273,6 @@ function Torneo({user_ID}) {
                             >
                                 <InputNumber style={{ width: '100%' }} placeholder='Escriba su Teléfono' />
                             </Form.Item>
-
-                            
                         </Col>
                         <Col>
                             <div className="subir-foto">
@@ -314,35 +296,6 @@ function Torneo({user_ID}) {
                                     <img src={upload} alt="subir archivo" width={'30px'} height={'30px'} />
                                 </label>
                             </div>
-                            {/* Agregar premios */}
-                            <Form.List name="premios">
-                                {(fields, { add, remove }) => (
-                                    <>
-                                        {fields.map(({ key, name, fieldKey, ...restField }) => (
-                                            <Row key={key} gutter={[16, 16]}>
-                                                <Col span={20}>
-                                                    <Form.Item
-                                                        {...restField}
-                                                        name={[name, 'premio']}
-                                                        fieldKey={[fieldKey, 'premio']}
-                                                        rules={[{ required: true, message: 'Por favor ingrese un premio' }]}
-                                                    >
-                                                        <Input placeholder="Ingrese el premio" />
-                                                    </Form.Item>
-                                                </Col>
-                                                <Col span={4}>
-                                                    <MinusCircleOutlined onClick={() => remove(name)} />
-                                                </Col>
-                                            </Row>
-                                        ))}
-                                        <Form.Item>
-                                            <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                                                Agregar Premio
-                                            </Button>
-                                        </Form.Item>
-                                    </>
-                                )}
-                            </Form.List>
                         </Col>
                     </Row>
                     <Form.Item
@@ -405,8 +358,9 @@ function Torneo({user_ID}) {
                     />
                 </div>
             )}
+
         </div>
     );
 }
 
-export default Torneo;
+export default Wally;
