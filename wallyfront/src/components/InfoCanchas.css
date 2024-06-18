@@ -37,3 +37,9 @@
     margin: 4px 0;
     font-size: 1em;
 }
+
+.wally-info button {
+    margin-top: 12px;
+    left: 70%;
+    padding: 18px;
+}

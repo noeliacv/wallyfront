@@ -1,16 +1,14 @@
 import React from "react";
-import NavbarUsuario from "../NavbarUsuario";
-import Buscador from "../Buscador";
 import Title from "../Title";
+import InfoCancha from "../InfoCanchas";
 export const Busqueda = () => {
     return (
         <>
-            <div className="spa">
+            <div className="spa fondos">
                 <Title subTitulo="Tu lugar para el Wally" titulo="Registrate Ahora" />
+                <InfoCancha />
             </div>
-            <div className="bar">
-                <Buscador />
-            </div>
+
         </>
     );
 };
