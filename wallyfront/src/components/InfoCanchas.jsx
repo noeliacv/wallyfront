@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../firebase/firebase-conf';
-import { collection, getDocs,addDoc } from 'firebase/firestore';
+import { collection, getDocs, addDoc } from 'firebase/firestore';
 import { Card, Button, Modal, Form, Input, DatePicker, TimePicker } from 'antd';
 import BarraBusqueda from './BarraBusqueda';
 import moment from 'moment';
@@ -49,7 +49,6 @@ const InfoCancha = () => {
         try {
             const { date, time, hours } = values;
 
-            // Convertir la fecha y hora a cadenas de texto
             const formattedDate = date.format('YYYY-MM-DD');
             const formattedTime = time.format('HH:mm');
 
@@ -67,8 +66,8 @@ const InfoCancha = () => {
             form.resetFields();
         }
     };
-    
-    console.log('Datos mostrados', wallys.id) 
+
+    console.log('Datos mostrados', wallys.id)
 
     const handleSearch = (criteria) => {
         const { name, city, hour } = criteria;
@@ -83,7 +82,7 @@ const InfoCancha = () => {
         console.log('Filtered results:', filtered); // <-- Añade este log
         setFilteredWallys(filtered);
     };
-    
+
 
 
     return (

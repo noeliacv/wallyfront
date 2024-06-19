@@ -7,29 +7,17 @@ function Footer() {
     <div className='footer-container'>
       <section className='footer-subscription'>
         <p className='footer-subscription-heading'>
-          El amigo que necesitas para ese momento especial.
+        Desde la red hasta la victoria - Tu lugar para el Wally
         </p>
         <p className='footer-subscription-text'>
-          Suscribite y comienza, Ya no estes solo.
+          Wally a tu manera - Canchas y torneos a un clic.
         </p>
-        {/*<div className='input-areas'>
-          <form>
-            <input
-              className='footer-input'
-              name='email'
-              type='email'
-              placeholder='Tu correo'
-            />
-            <Button buttonStyle='btn--outline'>Suscribirse</Button>
-          </form>
-  </div>*/}
       </section>
       <div class='footer-links'>
         <div className='footer-link-wrapper'>
           <div class='footer-link-items'>
             <h2>About Us</h2>
             <Link to='/ConoceMas'>Como funciona</Link>
-            <Link to='/'>Amigos Alquilados</Link>
             <Link to='/'>FAQ'</Link>
             <Link to='/'>Terminos y condiciones</Link>
           </div>
@@ -39,15 +27,6 @@ function Footer() {
             <Link to='/Soporte'>Soporte</Link>
             <Link to='/'>Direcciones</Link>
             <Link to='/'>Patrocinadores</Link>
-          </div>
-        </div>
-        <div className='footer-link-wrapper'>
-          <div class='footer-link-items'>
-            <h2>Amigos</h2>
-            <Link to='/SeAmigo'>Se un amigo</Link>
-            <Link to='/ConocerMas'>Busca Amigo</Link>
-            <Link to='/'>Ubicacion</Link>
-            <Link to='/'>Influencers</Link>
           </div>
           <div class='footer-link-items'>
             <h2>Redes</h2>
@@ -62,12 +41,11 @@ function Footer() {
         <div class='social-media-wrap'>
           <div class='footer-logo'>
             <Link to='/' className='social-logo'>
-              NEARBY 
-              FRIEND
+              WALLYNET
               <i class='fab fa-typo3' />
             </Link>
           </div>
-          <small class='website-rights'>Booleans Soft © 2024</small>
+          <small class='website-rights'>CantarranSoft © 2024</small>
           <div class='social-icons'>
             <Link
               class='social-icon-link facebook'

@@ -1,6 +1,6 @@
 import './App.css'
 import {Route, Routes}from "react-router-dom";
-import {Home, Registro,Busqueda, RegistrarWally, RegistrarTorneo, ListaTorneo, CanchasWally} from "./components/pages";
+import {Home, Registro,Busqueda, RegistrarWally, RegistrarTorneo, ListaTorneo, CanchasWally, BusquedaTorneo} from "./components/pages";
 import Fotter from "./components/Fotter"
 import ScrollToTop from './components/ScrollToTop.jsx'
 import { auth, db } from "./firebase/firebase-conf";
@@ -61,13 +61,14 @@ function App() {
         <div className="content">
           <ScrollToTop />
           <Routes>
-            <Route path='/' element= {<Home/>}/>
+            <Route path="/" element={<Home user={user} userID={userID} />} />
             <Route path='/Registro' element= {<Registro/>}/>
             <Route path='/Busqueda' element= {<Busqueda/>}/>
             <Route path='/RegistrarWally' element= {<RegistrarWally user_ID={userID} />}/>
             <Route path='/RegistrarTorneo' element= {<RegistrarTorneo user_ID={userID}/>}/>
             <Route path='/Torneos' element= {<ListaTorneo user_ID={userID}/>}/>
             <Route path='/Canchas' element= {<CanchasWally user_ID={userID}/>}/>
+            <Route path='/BusquedaTorneo' element= {<BusquedaTorneo/>}/>         
           </Routes>
         </div>
         <ToastContainer />

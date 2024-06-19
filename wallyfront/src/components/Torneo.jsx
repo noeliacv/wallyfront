@@ -170,9 +170,9 @@ function Torneo({user_ID}) {
                                         message: "Por favor la Ubicacion del Wally",
                                     },
                                     { whitespace: true },
-                                    { min: 2, message: "El apellido debe tener al menos 2 caracteres" },
-                                    { max: 30, message: "El apellido no puede tener más de 30 caracteres" },
-                                    { pattern: /^[a-zA-Z\s]*$/, message: "El apellido solo puede contener letras del alfabeto" },
+                                    { min: 2, message: "La ubicacion debe tener al menos 2 caracteres" },
+                                    { max: 30, message: "La ubicacion no puede tener más de 30 caracteres" },
+                                    { pattern: /^[a-zA-Z\s]*$/, message: "La ubicacion solo puede contener letras del alfabeto" },
                                 ]}
                                 hasFeedback
                             >
@@ -256,7 +256,7 @@ function Torneo({user_ID}) {
                                     },
                                 ]}
                             >
-                                <InputNumber style={{ width: '100%' }} placeholder='Escriba su Teléfono' />
+                                <InputNumber style={{ width: '100%' }} placeholder='Numero Maximo de Jugadores' />
                             </Form.Item>
 
                             <Form.Item
@@ -388,7 +388,7 @@ function Torneo({user_ID}) {
                     )}
                     <Form.Item wrapperCol={{ offset: 8, span: 8 }}>
                         <Button type="primary" htmlType="submit" disabled={isButtonDisabled}>
-                            Registrar Wally
+                            Registrar Torneo
                         </Button>
                     </Form.Item>
                 </Form>

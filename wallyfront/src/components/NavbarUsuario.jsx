@@ -74,9 +74,9 @@ export const NavbarUsuario = ({ userData, userID }) => {
             <ul>
                 <li><NavLink to='/'>Inicio</NavLink></li>
                 <li><NavLink to='/Busqueda'>Buscar Wally</NavLink></li>
-                <li><NavLink to='/Solicitudes'>Historial</NavLink></li>
+                <li><NavLink to='/BusquedaTorneo'>Buscar Torneos</NavLink></li>
                 {/*<li>Tu Wally</li>*/}
-                <li>
+                <li>    
                     <div className="user-menu" ref={menuRef}>
                         <div className="user-avatar" onClick={toggleMenu}>
                             <img src={userAvatar} alt="Usuario" />

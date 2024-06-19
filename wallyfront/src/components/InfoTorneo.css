@@ -37,3 +37,8 @@
     margin: 4px 0;
     font-size: 1em;
 }
+.btn-tor{
+padding: 20px;
+display: flex;
+text-align: right;
+}

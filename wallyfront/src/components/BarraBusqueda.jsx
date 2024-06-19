@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Input, Select, Button } from 'antd';
 import './BarraBusqueda.css';
-
 const { Option } = Select;
 
 const cities = ["La Paz", "Oruro", "Cochabamba", "Santa Cruz", "Tarija", "Beni", "Pando", "Potosí", "Sucre"];
@@ -24,6 +23,7 @@ const BarraBusqueda = ({ onSearch }) => {
 
     return (
         <div className="search-bar">
+            
             <Input
                 placeholder="Buscar por nombre"
                 value={searchName}
@@ -41,6 +41,7 @@ const BarraBusqueda = ({ onSearch }) => {
                     <Option key={city} value={city}>{city}</Option>
                 ))}
             </Select>
+            
             <Select
                 placeholder="Buscar por horario"
                 value={searchHour}
@@ -52,6 +53,7 @@ const BarraBusqueda = ({ onSearch }) => {
                     <Option key={hour} value={hour}>{hour}</Option>
                 ))}
             </Select>
+            
             <Button type="primary" onClick={handleSearch} className="search-button">Buscar</Button>
         </div>
     );
